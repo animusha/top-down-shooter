@@ -80,9 +80,14 @@ public class PlayerAim : MonoBehaviour
     private void UpdateAimPosition()
     {
         Transform target = Target();
+
         if(target != null && isLockingToTarget)
         {
-            aim.position = target.position;
+            if(target.GetComponent<Renderer>() != null)
+                aim.position = target.GetComponent<Renderer>().bounds.center;
+            else
+                aim.position = target.position;
+            
             return;
         }
 

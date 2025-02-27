@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class WeaponVisualController : MonoBehaviour
+public class PlayerWeaponVisuals : MonoBehaviour
 {
     private Animator anim;
     private bool isGrabbingWeapon;
@@ -47,16 +47,21 @@ public class WeaponVisualController : MonoBehaviour
     {
         CheckWeaponSwitch();
 
-        if(Input.GetKeyDown(KeyCode.R) && isGrabbingWeapon == false)
-        {
-            anim.SetTrigger("Reload");
-            ReduceRigWeight();
-        }
-
         UpdateRigWeight();
 
         UpdateLeftHandIKWeight();
 
+    }
+
+    public void PlayReloadAnimation()
+    {
+        if(isGrabbingWeapon)
+        {
+            return;
+        }
+
+        anim.SetTrigger("Reload");
+        ReduceRigWeight();
     }
 
     private void UpdateLeftHandIKWeight()
